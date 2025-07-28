@@ -91,9 +91,9 @@ interface ProfileFieldProps {
 }
 
 interface CreateUserPrams {
-    email: string;
-    password: string;
-    name: string;
+  name: string;
+  email: string;
+  password: string;
 }
 
 interface SignInParams {

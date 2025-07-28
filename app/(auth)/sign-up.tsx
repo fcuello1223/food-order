@@ -4,21 +4,26 @@ import { Alert, Text, View } from "react-native";
 import CustomInput from "@/components/CustomInput";
 import CustomButton from "@/components/CustomButton";
 import { Link, router } from "expo-router";
+import { createUser } from "@/lib/appwrite";
 
 const SignUp = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [form, setForm] = useState({name: '', email: "", password: "" });
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
 
   const submitHandler = async () => {
-    if (!form.name || !form.email || !form.password) {
-      return Alert.alert("Error", "Please Enter a Valid Name, E-Mail and Password!");
+    const { name, email, password } = form;
+
+    if (!name || !email || !password) {
+      return Alert.alert(
+        "Error",
+        "Please Enter a Valid Name, E-Mail and Password!"
+      );
     }
 
     setIsSubmitting(true);
 
     try {
-      //Call Appwrite Sign Up Function
-      Alert.alert("Success", "You Have Succesfully Signed Up!");
+      await createUser({ name, email, password });
       router.replace("/");
     } catch (error: any) {
       Alert.alert("Error", error.message);
@@ -51,12 +56,14 @@ const SignUp = () => {
         label="Password"
         secureTextEntry={true}
       />
-      <CustomButton title="Sign Up" />
+      <CustomButton title="Sign Up" isLoading={isSubmitting} onPress={submitHandler} />
       <View className="flex flex-row justify-center gap-2 mt-5">
         <Text className="base-regular text-gray-100">
           Already Have an Account?
         </Text>
-        <Link href="/sign-in" className="base-bold text-primary">Sign In</Link>
+        <Link href="/sign-in" className="base-bold text-primary">
+          Sign In
+        </Link>
       </View>
     </View>
   );

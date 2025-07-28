@@ -1,17 +1,13 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { Redirect } from "expo-router";
+import { Redirect, Slot } from "expo-router";
 
-export default function _Layout() {
-  const isAuth = false;
+import useAuthStore from "@/store/auth.store";
 
-  if (!isAuth) {
+export default function TabLayout() {
+  const { isAuthenticated } = useAuthStore();
+
+  if (!isAuthenticated) {
     return <Redirect href="/sign-in" />;
   }
 
-  return (
-    <View>
-      <Text>_Layout</Text>
-    </View>
-  );
+  return <Slot />;
 }
