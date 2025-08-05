@@ -5,6 +5,7 @@ import {
   Databases,
   ID,
   Query,
+  Storage,
 } from "react-native-appwrite";
 
 import { CreateUserPrams, SignInParams } from "@/type";
@@ -32,6 +33,7 @@ client
 export const account = new Account(client);
 export const databases = new Databases(client);
 export const avatars = new Avatars(client);
+export const storage = new Storage(client);
 
 export const createUser = async ({
   name,
