@@ -15,6 +15,11 @@ export const appwriteConfig = {
   projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!,
   databaseId: "687d3d2e003a7438f031",
   userCollection: "687d47030024ced7bfdb",
+  categoriesCollectionId: "689105df002565b7de36",
+  menuCollectionId: "6891310f001734bc5141",
+  customizationsCollectionId: "68917439000a2e7947db",
+  menuCustomizationCollectionId: "68922636001abc675f96",
+  bucketId: "689257900032151d05d1",
 };
 
 export const client = new Client();
@@ -27,35 +32,6 @@ client
 export const account = new Account(client);
 export const databases = new Databases(client);
 export const avatars = new Avatars(client);
-
-// export const createUser = async ({
-//   name,
-//   email,
-//   password,
-// }: CreateUserPrams) => {
-//   try {
-//     const newAccount = await account.create(ID.unique(), name, email, password);
-
-//     if (!newAccount) {
-//       throw Error;
-//     }
-
-//     await signIn({ email, password });
-
-//     const avatarUrl = avatars.getInitialsURL(name);
-
-//     const newUser = await databases.createDocument(
-//       appwriteConfig.databaseId,
-//       appwriteConfig.userCollection,
-//       ID.unique(),
-//       { accountId: newAccount.$id, name, email, avatar: avatarUrl }
-//     );
-
-//     return newUser;
-//   } catch (error) {
-//     throw new Error(error as string);
-//   }
-// };
 
 export const createUser = async ({
   name,
